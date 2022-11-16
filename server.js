@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 // const loginRouter = require("./routes/login.routes");
-import {getAll,getByID,create,update} from "./controller/loginController.js"
-import { router } from "./routes/login.routes.js";
+import { loginRouter } from "./routes/login.routes.js";
+import { timesheetRouter } from "./routes/timesheet.routes.js";
 const app = express();
 
 var corsOptions = {
@@ -12,9 +12,9 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/login",await router);
+app.use("/login",await loginRouter);
 
-
+app.use("/timesheet",await timesheetRouter);
 
 // app.get("/data",await getAll);
 
