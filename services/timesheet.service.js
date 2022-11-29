@@ -11,12 +11,12 @@ const connection = await mysql.createPool({
     queueLimit: 0
 });
 
-export async function getTimesheetById (LOGINID) {
-    return await connection.execute('SELECT * FROM `Login_Master` WHERE LOGINID = ?  ',[LOGINID]);
+export async function getTimesheetById (LOGINID,TSDATE) {
+    return await connection.execute('SELECT * FROM `timesheet` WHERE LOGINID = ? AND TSDATE = ? ',[LOGINID,TSDATE]);
 }
 
-export async function createTimesheetById (EMPCOD,USERNAME,PASSWORD) {
-    return await connection.execute('INSERT INTO `Login_Master` (`EMPCOD`, `USERNAME`, `PASSWORD`) VALUES (?,?,?)',[EMPCOD,USERNAME,PASSWORD]);
+export async function createTimesheetById (LOGINID,TSDATE,CHECKIN,CHECKOUT) {
+    return await connection.execute('INSERT INTO `timesheet` (`loginid`,`tsdate`,`checkin`,`checkout`) VALUES (?,?,?,?)',[LOGINID,TSDATE,CHECKIN,CHECKOUT]);
 }
 export async function updateTimesheetById (LOGINID,USERNAME,PASSWORD) {
     return await connection.execute('UPDATE `Login_Master`  SET `USERNAME` = ?, `PASSWORD` = ? WHERE (`LOGINID` = ?)' ,[USERNAME,PASSWORD,LOGINID]);

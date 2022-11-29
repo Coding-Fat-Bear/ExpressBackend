@@ -3,6 +3,7 @@ import cors from "cors";
 // const loginRouter = require("./routes/login.routes");
 import { loginRouter } from "./routes/login.routes.js";
 import { timesheetRouter } from "./routes/timesheet.routes.js";
+import {employeeRouter} from "./routes/employeemaster.routes.js";
 const app = express();
 
 var corsOptions = {
@@ -16,11 +17,7 @@ app.use("/login",await loginRouter);
 
 app.use("/timesheet",await timesheetRouter);
 
-// app.get("/data",await getAll);
-
-// app.get("/data/:id",await getByID);
-// app.post("/create",await create)
-// app.put("/update",await update)
+app.use("/employee",await employeeRouter);
 
 app.use((err, req, res, next) => {
   console.error(err.stack)
