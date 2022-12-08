@@ -1,31 +1,74 @@
-import mysql from 'mysql2/promise';
-import * as dotenv from 'dotenv' 
-dotenv.config()
-const connection = await mysql.createPool({
-    host : process.env.HOST,
-    user : process.env.USER,
-    password : process.env.PASSWORD,
-    database : process.env.DB,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
-});
+const{Login,Login_Master} = require("../Models");
 
-export async function getLoginById (LOGINID) {
-    return await connection.execute('SELECT * FROM `Login_Master` WHERE LOGINID = ?  ',[LOGINID]);
-}
+   async function createLogin (req) {
+      console.log("servies");
+      // const EID =  req.body;
+      return data = await Login_Master.create(req).catch(err =>{
+      console.log(err);
+           })
+    }
+    async function createUser (data,callback) {
+      console.log("servies");
+      console.log(data);
+      let error;
+      result = await Login_Master.create(data).catch(err =>{
+          error = err;
+           })
+       if (error) {
+        console.log("Error" +error);
+        return callback(error);
+       }else{
+        return callback (null,result.dataValues)
+       }
+        
+    }
+    
+    async function fetchLogin (id){
+      console.log("servies");
+      const vWhere = {
+          where: {
+            LOGINID : "1"
+          }
+        }
+        vWhere.where.LOGINID = id;
+      // return data = await Login.findone(vWhere).catch(err =>{
+      //   console.log(err);
+      //      })
+       let data = await Login_Master.findOne(vWhere).catch(err =>{
+        console.log(err);
+           })
+           console.log("there");
+           return data;
+      }
 
-export async function getLoginAll () {
-    return await connection.execute('SELECT * FROM `Login_Master` ');
-}
+    async function getbyUname(username,callback){
+      console.log(username);
+      const vWhere = {
+        where: {
+          USERNAME : "SomeName"
+        }
+      }
+      vWhere.where.USERNAME = username;
+      
+      result = await Login_Master.findOne(vWhere).catch(err =>{
+        return err;
+           })
+           console.log("result  :  "+result);
+           try {
+            return callback (null,result.dataValues)
+           } catch (error) {
+              return callback (error)
+           }
+      
+      }
 
-export async function delLoginById (LOGINID) {
-    return await connection.execute('DELETE FROM `Login_Master` WHERE (`LOGINID` = ?)',[LOGINID]);
-}
+    
 
-export async function createLogin (EMPCOD,USERNAME,PASSWORD) {
-    return await connection.execute('INSERT INTO `Login_Master` (`EMPCOD`, `USERNAME`, `PASSWORD`) VALUES (?,?,?)',[EMPCOD,USERNAME,PASSWORD]);
-}
-export async function updateLogin (LOGINID,USERNAME,PASSWORD) {
-    return await connection.execute('UPDATE `Login_Master`  SET `USERNAME` = ?, `PASSWORD` = ? WHERE (`LOGINID` = ?)' ,[USERNAME,PASSWORD,LOGINID]);
-}
+  module.exports = {
+        createLogin,
+        fetchLogin,
+        getbyUname,
+        createUser
+    }
+    // exports.createLogin = 
+    //     createLogin ;

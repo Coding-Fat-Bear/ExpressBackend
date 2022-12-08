@@ -1,20 +1,9 @@
-//dont know how to use in es6 :(
-
-import express from "express";
-export const  loginRouter = express.Router();
-import {getAll,getByID,create,update} from "../controller/loginController.js"
-// const loginController = require("../controller/loginController.js");
-
-  // async function getAllroute(){
-  loginRouter.get("/data", getAll);
-// }
-
-  // async function getByIDroute(){ 
-  loginRouter.get("/data/:id",getByID);
-// }
-  // async function createroute(){
-  loginRouter.post("/create",create)
-// }
-  // async function updateroute(){
-  loginRouter.put("/update",update)
-// }
+  const express = require('express');
+  const router = express.Router();
+const loginController = require("../controller/login.controller");
+const { checkToken } = require("../auth/token.validation");
+    router.post("/create",loginController.createLogin)
+    // router.get("/fetch/:id",checkToken,loginController.fetch)
+    router.get("/fetch/:id",checkToken,loginController.fetch)
+    router.post("/login",loginController.generateToken);
+module.exports = router;
