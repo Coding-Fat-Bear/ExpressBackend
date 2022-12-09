@@ -24,7 +24,7 @@ module.exports = {
                     } else {
                         console.log("no access");
                         res.json({
-                            success:0,
+                            success: 0,
                             message: "Dont have access"
                         })
                     }
