@@ -26,7 +26,8 @@ const { sign } = require("jsonwebtoken");
           console.log("the param is "+id);
           const data = await login.fetchLogin(id);
           console.log("data from service is "+ data); 
-          res.json(data)
+          console.log(res);
+          res.send(data)
         } catch (error) {
           console.log(error);
           res.json({
