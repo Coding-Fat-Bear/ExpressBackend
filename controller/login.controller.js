@@ -44,6 +44,7 @@ const { sign } = require("jsonwebtoken");
           if(err){
               console.log(err);
           }
+          console.log("here");
           console.log(result);
           if(!result){
               return res.json({

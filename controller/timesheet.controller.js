@@ -4,16 +4,16 @@ const timesheet = require("../services/Timesheet.service")
 
 
 async function fetchtimesheet(req,res) {
+    console.log("controller");
     const data = await timesheet.fetchtimesheet(req)
     try {
-       
-        
+       console.log(1);
             console.log(data.dataValues);
              res.send(data);
         
-        
     } 
     catch (error) {
+        console.log(2);
         console.log(data);
         res.json({
             error : "no such id exist"
@@ -49,9 +49,22 @@ async function updatetimesheet(req,res) {
     }
     
 }
+async function fetchAlltimesheet(req,res){
+    const data = await timesheet.fetchMonthTimesheet(req)
+    console.log("controller");
+    console.log(data);
+    if (data == "error") {
+        res.json({
+            error :" no data exist"
+          })
+    } else {
+        res.send(data);
+    }
+}
 
 module.exports = {
     fetchtimesheet,
     createtimesheet,
-    updatetimesheet
+    updatetimesheet,
+    fetchAlltimesheet
     };

@@ -70,6 +70,7 @@ async function createtimesheet (req) {
         console.log(err);
         error = err;
          })
+         console.log(data);
          if (error) {
           console.log("has error");
           console.log(error);
@@ -81,8 +82,34 @@ async function createtimesheet (req) {
       }
   }
 
+
+
+  async function fetchMonthTimesheet (req) {
+    const id = req.params.id;
+    const month = req.params.month;
+    const year = req.params.year;
+    const error = "error";
+    console.log("servies");
+    const query = `SELECT * FROM agnieportal.time_sheet WHERE MONTH(tsdate) = ${month} AND YEAR(tsdate) = ${year} AND LOGINID = ${id};`
+    console.log(query);
+    const data = await time_sheet.sequelize.query(query).catch(
+      error => {console.log(error);
+        return error;});
+      if (data[0][0] == undefined) {
+        console.log("has no records");
+        return error
+      }else
+      {
+        return data[0]
+      }
+     
+         
+      }
+  
+
   module.exports = {
     createtimesheet,
     fetchtimesheet,
-    updatetimesheet
+    updatetimesheet,
+    fetchMonthTimesheet
 }
