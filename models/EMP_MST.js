@@ -74,10 +74,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(30),
       allowNull: true
     },
-    ACTFLG: {
-      type: DataTypes.STRING(1),
-      allowNull: true
-    },
     BASSAL: {
       type: DataTypes.DECIMAL(11,2),
       allowNull: true
