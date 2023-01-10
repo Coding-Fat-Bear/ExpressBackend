@@ -1,10 +1,12 @@
+
 {
   "development": {
     "username": "db_user",
     "password": "AgnChennai@2021",
     "database": "agnieportal",
     "host": "agn.db.mysql.agnieindia.com",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "port": "3306"
   },
   "test": {
     "username": "root",

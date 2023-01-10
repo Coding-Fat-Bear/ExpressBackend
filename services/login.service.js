@@ -1,74 +1,57 @@
-const{Login,Login_Master} = require("../Models");
+const {Login_Master} = require("../models");
 
-   async function createLogin (req) {
-      console.log("servies");
-      // const EID =  req.body;
-      return data = await Login_Master.create(req).catch(err =>{
-      console.log(err);
-           })
-    }
-    async function createUser (data,callback) {
-      console.log("servies");
-      console.log(data);
-      let error;
-      result = await Login_Master.create(data).catch(err =>{
-          error = err;
-           })
-       if (error) {
-        console.log("Error" +error);
-        return callback(error);
-       }else{
-        return callback (null,result.dataValues)
-       }
-        
-    }
-    
-    async function fetchLogin (id){
-      console.log("servies");
-      const vWhere = {
-          where: {
-            LOGINID : "1"
-          }
-        }
-        vWhere.where.LOGINID = id;
-      // return data = await Login.findone(vWhere).catch(err =>{
-      //   console.log(err);
-      //      })
-       let data = await Login_Master.findOne(vWhere).catch(err =>{
+
+async function createuser(req,callback){
+    let reqarr = Object.values(req);
+    console.log(reqarr);
+    let result = await Login_Master.create(req).catch(err=>{
         console.log(err);
-           })
-           console.log("there");
-           return data;
-      }
+        
+    })
+    return callback(null,result);
+};
 
-    async function getbyUname(username,callback){
-      console.log(username);
-      const vWhere = {
+// login with Token generation starts
+async function logintokensrv(username,callback){
+    const vWhere = {
         where: {
           USERNAME : "SomeName"
         }
-      }
-      vWhere.where.USERNAME = username;
-      
-      result = await Login_Master.findOne(vWhere).catch(err =>{
+    }
+    vWhere.where.USERNAME = username;
+
+    let result = await Login_Master.findOne(vWhere).catch(err =>{
         return err;
            })
-           console.log("result  :  "+result);
            try {
-            return callback (null,result.dataValues)
+             return callback (null,result.dataValues)
            } catch (error) {
               return callback (error)
            }
-      
+
+}
+// login with Token generation end
+
+async function fetchLogin (id){
+    console.log("servies");
+    const vWhere = {
+        where: {
+          LOGINID : "1"
+        }
       }
-
-    
-
-  module.exports = {
-        createLogin,
-        fetchLogin,
-        getbyUname,
-        createUser
+      vWhere.where.LOGINID = id;
+    // return data = await Login.findone(vWhere).catch(err =>{
+    //   console.log(err);
+    //      })
+     let data = await Login_Master.findOne(vWhere).catch(err =>{
+      console.log(err);
+         })
+         console.log("there");
+         return data;
     }
-    // exports.createLogin = 
-    //     createLogin ;
+
+module.exports ={
+    createuser,
+    logintokensrv,
+    fetchLogin
+}
