@@ -7,7 +7,6 @@
     "host": "agn.db.mysql.agnieindia.com",
     "dialect": "mysql",
     "port": "3306"
-
   },
   "test": {
     "username": "root",

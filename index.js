@@ -12,9 +12,19 @@ const pgmlngRouter = require("./router/pgm_lngu.router");
 const rnkempRouter = require("./router/rnk_emp.router");
 const authRouter = require("./router/authorization.router");
 const cntryRouter = require("./router/country.router");
+const cors = require('cors')
 const app = express();
+const timesheetRouter = require("./router/timesheet.router");
 require("dotenv").config();
 
+let corsOptions = {
+    origin: "http://localhost:4200"
+  };
+
+app.use(cors(corsOptions));
+
+
+app.use(express.urlencoded({ extended: true }));//
 app.use(express.json());
 app.use("/api",loginRouter);
 app.use("/api",employeeRouter);
@@ -29,6 +39,12 @@ app.use("/api",pgmlngRouter);
 app.use("/api",rnkempRouter);
 app.use("/api",authRouter);
 app.use("/api",cntryRouter);
+app.use("/timesheet", timesheetRouter);
+
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+  res.status(500).send( 'Something broke! ' )
+  })
 
 app.listen(process.env.port,()=>{
     console.log("server started");
