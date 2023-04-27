@@ -1,4 +1,4 @@
-const{time_sheet} = require("../Models");
+const{time_sheet} = require("../models");
 
 
 async function createtimesheet (req) {

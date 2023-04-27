@@ -1,12 +1,12 @@
 var DataTypes = require("sequelize").DataTypes;
-var _Rank_emp = require("./Rank_emp");
+var _Inquiry = require("./Inquiry");
 
 function initModels(sequelize) {
-  var Rank_emp = _Rank_emp(sequelize, DataTypes);
+  var Inquiry = _Inquiry(sequelize, DataTypes);
 
 
   return {
-    Rank_emp,
+    Inquiry,
   };
 }
 module.exports = initModels;

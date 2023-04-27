@@ -6,10 +6,15 @@ const { genSaltSync,hashSync,compareSync } = require("bcrypt");
 
 async function createlogin(req,res){
     const body = req.body;
+    
         const salt = await genSaltSync(10);
+        console.log(body);
+
         let hash =await hashSync(body.PASSWORD, salt,(err,hsh)=>{});
         body.PASSWORD= hash;
         await login.createuser(body,(err,result)=>{
+            console.log(result);
+            console.log(result);
             if(err){
                 console.log(err);
                 return res.status(500).json({
@@ -30,7 +35,8 @@ async function createlogin(req,res){
 // login with Token generation starts
 async function logintokencont(req,res){
     const body = req.body;
-
+    console.log("login");
+    console.log(body);
     await login.logintokensrv(body.USERNAME,(err,result)=>{
         if(err){
             console.log(err);
