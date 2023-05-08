@@ -1,18 +1,16 @@
-const{Inquiry} = require("../models");
+const{Project_Master} = require("../models");
 
 
-async function fetchInq(req){
+async function fetchpm(req){
     console.log(req.body);
     let error ;
-    console.log(req);
     const vWhere = {
         where: {
-          INQNO : req.body.INQNO,
-          EMPNO : req.body.EMPNO,
+          PRJNO : req.body.PRJNO
         }
       }
-    //   data = await inquiry.findOne
-    data = await Inquiry.findOne(vWhere).catch(err =>{
+    //   data = await Project_Master.findOne
+    data = await Project_Master.findOne(vWhere).catch(err =>{
         error = err;
             })
          if (error) {
@@ -26,11 +24,11 @@ async function fetchInq(req){
          }
 }
 
-async function createInq (req) {
+async function createpm (req) {
     console.log("servies");
     console.log(req);
     let error ;
-     data = await Inquiry.create(req).catch(err =>{
+     data = await Project_Master.create(req).catch(err =>{
           error = err;
          })
     
@@ -46,20 +44,29 @@ async function createInq (req) {
 
   }
 
-  async function updateInq (req) {
+  async function updatepm (req) {
     console.log("servies");
-    console.log(req);
     let error ;
+    console.log(req.body);
     const vWhere = {
-        where: {
-          INQNO : req.body.INQNO,
-          EMPNO : req.body.EMPNO,
-        }
+      where: {
+        PRJNO : req.body.PRJNO
       }
-      
+    }
+      console.log(vWhere); 
     console.log("servies");
-    data = await Inquiry.update(req.body,vWhere).catch(err =>{
-        console.log(err);
+    delete req.body.PRJNO;
+    console.log(req.body);
+    console.log("hardcode");
+    console.log({
+      "PRJNO": "PRJ06",
+      "PRJDES": "test26"
+    });
+    data = await Project_Master.update(req.body,vWhere).catch(err =>{
+      // data = await Project_Master.update(req.body,{where: {
+      //   "PRJNO": "PRJ06"
+      // }}).catch(err =>{
+        console.log("err");
         error = err;
          })
          console.log(data);
@@ -73,19 +80,18 @@ async function createInq (req) {
           return data
       }
   }
-  async function deleteInq (req) {
+  async function deletepm (req) {
     console.log("servies");
     console.log(req);
     let error ;
     const vWhere = {
         where: {
-          INQNO : req.body.INQNO,
-          EMPNO : req.body.EMPNO,
+          PRJNO : req.body.PRJNO
         }
       }
       
     console.log("servies");
-    data = await Inquiry.destroy(vWhere).catch(err =>{
+    data = await Project_Master.destroy(vWhere).catch(err =>{
         // console.log(err);
         error = err;
          })
@@ -103,8 +109,8 @@ async function createInq (req) {
 
 
 module.exports = {
-    fetchInq,
-    createInq,
-    updateInq,
-    deleteInq
+    fetchpm,
+    createpm,
+    updatepm,
+    deletepm
 }

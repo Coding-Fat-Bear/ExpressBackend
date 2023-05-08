@@ -1,12 +1,12 @@
 var DataTypes = require("sequelize").DataTypes;
-var _Inquiry = require("./Inquiry");
+var _Project_Master = require("./Project_Master");
 
 function initModels(sequelize) {
-  var Inquiry = _Inquiry(sequelize, DataTypes);
+  var Project_Master = _Project_Master(sequelize, DataTypes);
 
 
   return {
-    Inquiry,
+    Project_Master,
   };
 }
 module.exports = initModels;
