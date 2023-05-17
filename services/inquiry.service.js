@@ -7,8 +7,7 @@ async function fetchInq(req){
     console.log(req);
     const vWhere = {
         where: {
-          INQNO : req.body.INQNO,
-          EMPNO : req.body.EMPNO,
+          INQNO : req.params.INQNO
         }
       }
     //   data = await inquiry.findOne
