@@ -13,6 +13,7 @@ const rnkempRouter = require("./router/rnk_emp.router");
 const authRouter = require("./router/authorization.router");
 const cntryRouter = require("./router/country.router");
 const inquiryRouter = require("./router/inquiry.router");
+const pmRouter = require("./router/pm.router");
 const cors = require('cors')
 const app = express();
 const timesheetRouter = require("./router/timesheet.router");
@@ -41,6 +42,7 @@ app.use("/api",rnkempRouter);
 app.use("/api",authRouter);
 app.use("/api",cntryRouter);
 app.use("/api",inquiryRouter);
+app.use("/api",pmRouter);
 app.use("/timesheet", timesheetRouter);
 
 app.use((err, req, res, next) => {

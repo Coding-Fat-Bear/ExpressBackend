@@ -1,9 +1,9 @@
-const inquiry = require("../services/inquiry.service.js")
+const pm = require("../services/pm.service.js")
 
 
-async function fetchInq(req,res){
+async function fetchpm(req,res){
     console.log("controller");
-    const data = await inquiry.fetchInq(req)
+    const data = await pm.fetchpm(req)
     try {
             console.log(data.dataValues);
              res.send(data);
@@ -17,9 +17,9 @@ async function fetchInq(req,res){
     }
 };
 
-async function createInq(req,res) {
+async function createpm(req,res) {
     const load = req.body;
-    const data = await inquiry.createInq(load)
+    const data = await pm.createpm(load)
     console.log("controller");
     try {
         console.log(data.dataValues);
@@ -31,13 +31,13 @@ async function createInq(req,res) {
     }
 }
 
-async function updateInq(req,res) {
-    const data = await inquiry.updateInq(req)
+async function updatepm(req,res) {
+    const data = await pm.updatepm(req)
     console.log("controller");
     console.log(data);
     try {
         console.log("updated");
-        res.send(data);
+        res.send("Updated");
         // console.log(data.dataValues);
         // res.send(data);
     } catch (error) {
@@ -49,8 +49,8 @@ async function updateInq(req,res) {
     
 }
 
-async function deleteInq(req,res) {
-    const data = await inquiry.deleteInq(req)
+async function deletepm(req,res) {
+    const data = await pm.deletepm(req)
     console.log("controller");
     console.log(data);
     if(data == 1 ){
@@ -64,8 +64,8 @@ async function deleteInq(req,res) {
 }
 
 module.exports = {
-    fetchInq,
-    createInq,
-    updateInq,
-    deleteInq
+    fetchpm,
+    createpm,
+    updatepm,
+    deletepm
     };
