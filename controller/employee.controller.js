@@ -75,7 +75,7 @@ async function empupcont(req,res){
 
 // employee get starts****
 async function empdelcont(req,res){
-    let empcod = req.body.EMPCOD;
+    let empcod = req.params.EMPCOD;
     await employee.empdelserv(empcod,(err,result)=>{
      if(err){
          console.log(err);
