@@ -54,10 +54,16 @@ async function deleteInq(req,res) {
     console.log("controller");
     console.log(data);
     if(data == 1 ){
-        res.send("Deleted");
+        // res.send("Deleted");
+        res.json({
+            data : "Deleted"
+          })
         console.log("Not Deleted");
     }else{
-        res.send("Not Deleted");
+        // res.send("Not Deleted");
+        res.json({
+            data : "Not Deleted"
+          })
         console.log("Deleted");
     }
     

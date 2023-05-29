@@ -78,11 +78,9 @@ async function createInq (req) {
     let error ;
     const vWhere = {
         where: {
-          INQNO : req.body.INQNO,
-          EMPNO : req.body.EMPNO,
+          INQNO :  req.params.INQNO
         }
       }
-      
     console.log("servies");
     data = await Inquiry.destroy(vWhere).catch(err =>{
         // console.log(err);
