@@ -23,11 +23,19 @@ async function createlogin(req,res){
                 });
             }
             else{
-                result.PASSWORD = "Encoded"
+                try{
+                    result.PASSWORD = "Encoded"
                 return res.status(200).json({
                     success: 1,
                     data: result
                 });
+                }catch{
+                    return res.status(200).json({
+                        success: 1,
+                        data: "mismatch"
+                    });
+                }
+                
             }
         })
 };
